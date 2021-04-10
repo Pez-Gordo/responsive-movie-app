@@ -1,0 +1,28 @@
+#movie {
+    margin: 5px;
+}
+.btn {
+    margin: 5px;
+}
+#label {
+    margin: 5px;
+}
+.contenedor-principal {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.contenedor {
+    display: inline;
+    float:left;
+    margin: 5px;
+
+}
+@media only screen and (max-width: 800px) {
+    .contenedor-principal {
+        display: block;
+    }
+    .contenedor {
+        display: block;
+    }
+}
