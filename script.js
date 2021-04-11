@@ -8,20 +8,22 @@ $(document).ready(function(){
 
         var movie = $("#movie").val()
 
-        var url = "http://www.omdbapi.com/?plot=full&apikey=" + apikey
+        var url = "https://www.omdbapi.com/?plot=full&apikey=" + apikey
 
         $.ajax({
             method: "GET",
             url: url + "&t=" + movie,
             success:
                 function (data) {
-                    console.log(data)
 
-                    result = `
+                    console.log(data)
+                    
+                    if (data.Title) {
+                        result = `
                         <div class="contenedor-principal">
-                            <div class="contenedor">
-                                <img src="${data.Poster}" class="img-thumnail" width="300" height="480" />
-                            </div>
+                        <div class="contenedor">
+                        <img src="${data.Poster}" class="img-thumnail" width="300" height="480" />
+                        </div>
                             <div class="contenedor">
                                 <h6><strong>Title    --> </strong>${data.Title}</h6>
                                 <h6><strong>Type --> </strong>${data.Type}</h6>
@@ -39,11 +41,30 @@ $(document).ready(function(){
                                 <h6><strong>Synopsis --></strong> ${data.Plot}</h6>
                             </div>
                         </div>
-                    `;  
+                        `;  
 
-                    $("#result").html(result)
+                        $("#result").html(result)
+                        $('#movie').val('')
 
-
+                    } else {
+                        result = `
+                        <div class="contenedor-principal">
+                            <div class="contenedor"><br>
+                                Sorry, no matches found. Please check your query.<br><br>
+                                <img src="patan.png" class="img-thumnail" width="203" height="311" />
+                            </div>
+                        </div>
+                        `
+                        var melodia = document.createElement("audio");
+                        melodia.src = "./risa-patan.mp3";
+                        melodia.volume = .2;
+                        function playSonido(s) {
+                            s.currentTime = 0;
+                            s.play();
+                        }
+                        playSonido(melodia);
+                        $("#result").html(result)
+                    }
                 }
         })
 
