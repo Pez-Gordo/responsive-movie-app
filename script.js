@@ -1,15 +1,12 @@
 $(document).ready(function(){
 
     var apikey = "8b8983ad"
-    var prevQueries = []
-    var cont = 0
+    
     $("#movieForm").submit(function(event) {
 
         event.preventDefault()
 
         var movie = $("#movie").val()
-        prevQueries.push(movie)
-
         var url = "https://www.omdbapi.com/?plot=full&apikey=" + apikey
 
         $.ajax({
@@ -28,28 +25,54 @@ $(document).ready(function(){
                         <img src="${data.Poster}" class="img-thumnail" width="300" height="480" />
                         </div>
                             <div class="contenedor">
-                                <h6><strong>Title    --> </strong>${data.Title}</h6>
-                                <h6><strong>Type --> </strong>${data.Type}</h6>
-                                <h6><strong>Release Date --></strong> ${data.Released}</h6>
-                                <h6><strong>Length --></strong> ${data.Runtime}</h6>
-                                <h6><strong>Genre --></strong> ${data.Genre}</h6>
-                                <h6><strong>Director --> </strong>${data.Director}</h6>
-                                <h6><strong>Actors --></strong> ${data.Actors}</h6>
-                                <h6><strong>Awards --></strong> ${data.Awards}</h6>
-                                <h6><strong>Recaudation --></strong> ${data.BoxOffice}</h6>
-                                <h6><strong>Language --> </strong>${data.Language}</h6>
-                                <h6><strong>Production --></strong> ${data.Production}</h6>
-                                <h6><strong>IMDb Rating --></strong> ${data.imdbRating}</h6>
-                                <h6><strong>Number of votes --></strong> ${data.imdbVotes}</h6>
-                                <h6><strong>Synopsis --></strong> ${data.Plot}</h6>
+                                <table>
+                                    <tr>
+                                        <td class="tdkey"><strong>Title</strong></td><td>${data.Title}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Release Date</strong></td><td>${data.Released}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Length</strong></td><td>${data.Runtime}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Genre</strong></td><td>${data.Genre}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Director</strong></td><td>${data.Director}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Actors</strong></td><td>${data.Actors}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Awards</strong></td><td>${data.Awards}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Recaudation</strong></td><td>${data.BoxOffice}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Language</strong></td><td>${data.Language}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Production</strong></td><td>${data.Production}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>IMDb Rating</strong></td><td>${data.imdbRating}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Votes</strong></td><td>${data.imdbVotes}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdkey"><strong>Synopsis</strong></td><td>${data.Plot}</td>
+                                    </tr>
+                                         
+                                </table>
                             </div>
                         </div>
                         `;  
 
                         $("#result").html(result)
                         $('#movie').val('')
-                        cont = prevQueries.length -1
-                        console.log(prevQueries)
 
                     } else {
                         // in case of error:
@@ -70,30 +93,11 @@ $(document).ready(function(){
                         }
                         playSonido(melodia);
                         $("#result").html(result)
-                        cont = prevQueries.length -1
-                        console.log(prevQueries)
                     }
                 }
         })
 
     })
 
-    document.addEventListener('keydown', function(e) {
-        
-        if(e.code == "ArrowUp") {
-            if(cont >= 0) {
-                $('#movie').val(prevQueries[cont])
-                if(cont > 0)
-                    cont--
-            }
-        }
-        if(e.code == "ArrowDown") {
-            if(cont <= prevQueries.length){
-                $('#movie').val(prevQueries[cont])
-                if(cont < prevQueries.length -1)
-                    cont++
-            }
-        }
-
-    })
+    
 })

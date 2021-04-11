@@ -18,6 +18,17 @@
     margin: 5px;
 
 }
+table{
+    border: 2px solid white;
+}
+
+td {
+    border: 2px solid white;
+    background-color: beige;
+}
+.tdkey {
+    min-width: 125px;
+}
 @media only screen and (max-width: 800px) {
     .contenedor-principal {
         display: block;
