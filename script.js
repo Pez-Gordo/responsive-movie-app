@@ -1,12 +1,14 @@
 $(document).ready(function(){
 
     var apikey = "8b8983ad"
-
+    var prevQueries = []
+    var cont = 0
     $("#movieForm").submit(function(event) {
 
         event.preventDefault()
 
         var movie = $("#movie").val()
+        prevQueries.push(movie)
 
         var url = "https://www.omdbapi.com/?plot=full&apikey=" + apikey
 
@@ -19,6 +21,7 @@ $(document).ready(function(){
                     console.log(data)
                     
                     if (data.Title) {
+                        // In case of success:
                         result = `
                         <div class="contenedor-principal">
                         <div class="contenedor">
@@ -45,8 +48,11 @@ $(document).ready(function(){
 
                         $("#result").html(result)
                         $('#movie').val('')
+                        cont = prevQueries.length -1
+                        console.log(prevQueries)
 
                     } else {
+                        // in case of error:
                         result = `
                         <div class="contenedor-principal">
                             <div class="contenedor"><br>
@@ -64,9 +70,30 @@ $(document).ready(function(){
                         }
                         playSonido(melodia);
                         $("#result").html(result)
+                        cont = prevQueries.length -1
+                        console.log(prevQueries)
                     }
                 }
         })
+
+    })
+
+    document.addEventListener('keydown', function(e) {
+        
+        if(e.code == "ArrowUp") {
+            if(cont >= 0) {
+                $('#movie').val(prevQueries[cont])
+                if(cont > 0)
+                    cont--
+            }
+        }
+        if(e.code == "ArrowDown") {
+            if(cont <= prevQueries.length){
+                $('#movie').val(prevQueries[cont])
+                if(cont < prevQueries.length -1)
+                    cont++
+            }
+        }
 
     })
 })
