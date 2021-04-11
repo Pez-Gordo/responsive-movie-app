@@ -5,16 +5,19 @@ $(document).ready(function(){
     $("#movieForm").submit(function(event) {
 
         event.preventDefault()
-
+        
         var movie = $("#movie").val()
-        var url = "https://www.omdbapi.com/?plot=full&apikey=" + apikey
 
-        $.ajax({
-            method: "GET",
+        if(movie){
+
+            var url = "https://www.omdbapi.com/?plot=full&apikey=" + apikey
+
+            $.ajax({
+                method: "GET",
             url: url + "&t=" + movie,
             success:
                 function (data) {
-
+                    
                     console.log(data)
                     
                     if (data.Title) {
@@ -45,35 +48,35 @@ $(document).ready(function(){
                                         <td class="tdkey"><strong>Actors</strong></td><td>${data.Actors}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>Awards</strong></td><td>${data.Awards}</td>
+                                    <td class="tdkey"><strong>Awards</strong></td><td>${data.Awards}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>Recaudation</strong></td><td>${data.BoxOffice}</td>
+                                    <td class="tdkey"><strong>Recaudation</strong></td><td>${data.BoxOffice}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>Language</strong></td><td>${data.Language}</td>
+                                    <td class="tdkey"><strong>Language</strong></td><td>${data.Language}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>Production</strong></td><td>${data.Production}</td>
+                                    <td class="tdkey"><strong>Production</strong></td><td>${data.Production}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>IMDb Rating</strong></td><td>${data.imdbRating}</td>
+                                    <td class="tdkey"><strong>IMDb Rating</strong></td><td>${data.imdbRating}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>Votes</strong></td><td>${data.imdbVotes}</td>
+                                    <td class="tdkey"><strong>Votes</strong></td><td>${data.imdbVotes}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tdkey"><strong>Synopsis</strong></td><td>${data.Plot}</td>
+                                    <td class="tdkey"><strong>Synopsis</strong></td><td>${data.Plot}</td>
                                     </tr>
-                                         
-                                </table>
-                            </div>
-                        </div>
-                        `;  
-
-                        $("#result").html(result)
-                        $('#movie').val('')
-
+                                    
+                                    </table>
+                                    </div>
+                                    </div>
+                                    `;  
+                                    
+                                    $("#result").html(result)
+                                    $('#movie').val('')
+                                    
                     } else {
                         // in case of error:
                         result = `
@@ -95,7 +98,8 @@ $(document).ready(function(){
                         $("#result").html(result)
                     }
                 }
-        })
+            })
+        }
 
     })
 
